@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Case Generator - Powered by Groq</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"/>
+                    <path d="M8 16L14 22L24 10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>Test Case Generator</h1>
+            </div>
+            <p class="subtitle">Generate comprehensive test cases using Groq AI</p>
+        </header>
+
+        <!-- API Key Section -->
+        <div class="card api-section" id="apiSection">
+            <div class="card-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    API Configuration
+                </h3>
+            </div>
+            <div class="form-group">
+                <label for="apiKey">Groq API Key</label>
+                <div class="input-wrapper">
+                    <input type="password" id="apiKey" placeholder="Enter your Groq API key (gsk_...)" />
+                    <button type="button" class="toggle-btn" id="toggleApiKey">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+                <small class="help-text">Your API key is stored locally and never sent to our servers.</small>
+            </div>
+        </div>
+
+        <!-- Main Generator Section -->
+        <div class="card main-section">
+            <div class="card-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Describe Your Feature
+                </h3>
+            </div>
+            
+            <div class="form-group">
+                <label for="featureQuery">What feature would you like to generate test cases for?</label>
+                <textarea 
+                    id="featureQuery" 
+                    rows="5" 
+                    placeholder="Example: A user login form with email and password fields that validates inputs and shows error messages for invalid credentials. Include remember me checkbox and forgot password link."
+                ></textarea>
+            </div>
+
+            <div class="options-row">
+                <div class="form-group">
+                    <label for="testType">Test Type</label>
+                    <select id="testType">
+                        <option value="functional">Functional Testing</option>
+                        <option value="unit">Unit Testing</option>
+                        <option value="integration">Integration Testing</option>
+                        <option value="e2e">End-to-End (E2E) Testing</option>
+                        <option value="api">API Testing</option>
+                        <option value="ui">UI/UX Testing</option>
+                        <option value="security">Security Testing</option>
+                        <option value="performance">Performance Testing</option>
+                        <option value="all">All Types</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="outputFormat">Output Format</label>
+                    <select id="outputFormat">
+                        <option value="structured">Structured Text</option>
+                        <option value="gherkin">Gherkin (Given/When/Then)</option>
+                        <option value="markdown">Markdown</option>
+                        <option value="json">JSON</option>
+                        <option value="csv">CSV</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="model">Groq Model</label>
+                    <select id="model">
+                        <option value="llama-3.3-70b-versatile">Llama 3.3 70B</option>
+                        <option value="llama-3.1-8b-instant">Llama 3.1 8B</option>
+                        <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+                        <option value="gemma2-9b-it">Gemma 2 9B</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="generate-btn" id="generateBtn">
+                <span class="btn-text">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    Generate Test Cases
+                </span>
+                <span class="spinner hidden"></span>
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="card results-section hidden" id="resultsSection">
+            <div class="card-header results-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Generated Test Cases
+                </h3>
+                <div class="results-actions">
+                    <button class="action-btn" id="copyBtn" title="Copy to clipboard">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                    <button class="action-btn" id="downloadBtn" title="Download as file">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download
+                    </button>
+                    <button class="action-btn" id="regenerateBtn" title="Regenerate">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                        Regenerate
+                    </button>
+                </div>
+            </div>
+            <div class="results-content" id="resultsContent">
+                <pre><code id="resultsCode"></code></pre>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="card history-section hidden" id="historySection">
+            <div class="card-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Recent Generations
+                </h3>
+                <button class="clear-btn" id="clearHistory">Clear History</button>
+            </div>
+            <div class="history-list" id="historyList"></div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
