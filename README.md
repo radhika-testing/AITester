@@ -1,5 +1,5 @@
 Test Case Generator - Powered by Groq & KIMI
-AI Test Case Generator
+
 A web-based application that generates comprehensive test cases using Groq's AI API. Simply describe your feature, and the AI will generate detailed test cases including positive scenarios, negative scenarios, and edge cases.
 
 Features
