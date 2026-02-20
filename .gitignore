@@ -1,0 +1,80 @@
+# Windows system folders
+AppData/
+Application Data/
+Cookies/
+Local Settings/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+Documents/My Music/
+Documents/My Pictures/
+Documents/My Videos/
+
+# Windows system files
+NTUSER.DAT*
+ntuser.dat*
+ntuser.ini
+
+# User folders (optional - remove if you want to track these)
+Contacts/
+Downloads/
+Favorites/
+Links/
+Music/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+OneDrive/
+Postman/
+
+# Tool data folders (large, auto-generated)
+.antigravity/
+.config/
+.gemini/
+.kimi/
+.local/
+.n8n/
+.ollama/
+.rustup/
+
+# Cache and temp folders
+.cache/
+.tmp/
+Temp/
+tmp/
+
+# IDE and tool caches
+.vscode/
+.idea/
+
+# Other
+.bash_history
+Evidences/
+
+# Dependency directories (anywhere in the repo)
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Only track specific project folders - whitelist approach
+/*
+!/.gitignore
+!/AGENTS.md
+!/kimi-cli/
+!/project7-TestPlan_AI_AGENT_JIRA/
+!/Project8-n8n_Learning/
+!/jira_test.json
+!/backend_*.txt

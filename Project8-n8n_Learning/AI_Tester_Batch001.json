@@ -1,0 +1,122 @@
+{
+  "name": "AI_Tester_Batch001",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -432,
+        -144
+      ],
+      "id": "a8cfc0df-b954-4e67-9576-1adf205db225",
+      "name": "When chat message received",
+      "webhookId": "222e3f20-83aa-4149-8d24-c639ff81cf5d"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -208,
+        -192
+      ],
+      "id": "349acc73-a1ba-4345-88c6-6984530757ce",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "moonshotai/kimi-k2-instruct-0905",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        64
+      ],
+      "id": "daa865b4-3772-460a-bf56-93ba57ebf6f5",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "j8vJl1Ocl7NpNpB9",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "issueKey": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Issue_Key', ``, 'string') }}",
+        "updateFields": {}
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        144,
+        0
+      ],
+      "id": "574918bd-0b3d-44e1-a032-964cbf992f93",
+      "name": "Update an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "LffedNvROUJGpaHl",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "71108268-64e7-4e5e-b19b-34b716b2f5f1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "aff166830532a7a5d50ed486be75419fcda2d42b3286c8d760149ce60725677a"
+  },
+  "id": "qtxuu59Ajqt07jCB",
+  "tags": []
+}
